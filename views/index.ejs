@@ -52,7 +52,6 @@
         <h2>Welcome To <span>Story Syntax</span></h2>
         <hr class="sep">
         <p>Our app helps you write more effective user stories.</p>
-        <img class="img-responsive center-block wow fadeInUp" data-wow-delay=".3s" src="img/welcome/logo.png" alt="logo">
     </div>
 </section>
 <!-- This is the end of the second section after the hero image and nav bar html. -->
@@ -122,24 +121,24 @@
         <hr class="sep">
         <p>Enter Your Story</p>
         <div class="col-md-6 col-md-offset-3 wow fadeInUp" data-wow-delay=".3s">
-            <form action="/POST">
+            <form method="POST" action="/">
                 <div class="form-group">
                     <label for="Title">Title</label>
-                    <input type="text" class="form-control" id="Title" placeholder="Story Title Example: [Persona name] should (not) be able to [overarching action]">
+                    <input type="text" name="title" class="form-control" id="Title" placeholder="Story Title Example: [Persona name] should (not) be able to [overarching action]">
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="1" placeholder="GIVEN [necessary context and preconditions for story] Example: GIVEN that I’m a Connect 4 Player, I need to be able to play a game piece on the game board."></textarea>
+                    <textarea name="given" class="form-control" rows="1" placeholder="GIVEN [necessary context and preconditions for story] Example: GIVEN that I’m a Connect 4 Player, I need to be able to play a game piece on the game board."></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="1" placeholder="WHEN [action] Example: I click an empty game board space"></textarea>
+                    <textarea name="when" class="form-control" rows="1" placeholder="WHEN [action] Example: I click an empty game board space"></textarea>
                 </div>
-                <div class="form-group">
+                <div name="and" class="form-group">
                     <textarea class="form-control" rows="1" placeholder="Example: And it's my turn"></textarea>
                 </div>
-                <div class="form-group">
+                <div name="then" class="form-group">
                     <textarea class="form-control" rows="1" placeholder="THEN [reaction]"></textarea>
                 </div>
-                <a href="/profile" class="btn-block">Create Story</a>
+                <input class="btn-block" type="submit" value="Create Story" >
             </form>
         </div>
     </div>

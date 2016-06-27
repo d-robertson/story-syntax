@@ -5,6 +5,7 @@ var session = require('express-session');
 var passport = require('./config/passportConfig')
 var flash = require('connect-flash');
 var isLoggedIn = require('./middleware/isLoggedIn');
+var db = require('./models')
 var app = express();
 
 app.set('view engine', 'ejs');
@@ -37,6 +38,19 @@ app.get('/profile', isLoggedIn, function(req, res) {
 });
 
 app.use('/auth', require('./controllers/auth'));
+
+app.post('/', function(req, res) {
+  console.log('*******************', req.body.title);
+  db.story.Create({
+    title: req.body.title,
+    given: req.body.given,
+    when: req.body.when,
+    and: req.body.and,
+    then: req.body.then
+  }).done(function(story) {
+  console.log('&&&&&&&&&&&&&&&&&&&&&&&', story);
+  });
+});
 
 var server = app.listen(process.env.PORT || 3000);
 
