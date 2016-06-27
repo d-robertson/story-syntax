@@ -153,6 +153,28 @@ Buttons Styles
   text-decoration: none;
 }
 
+.ud-button {
+  margin: 25px 0 25px 150px;
+}
+.edit-btn, .delete-btn {
+  border: 3px solid #24242a;
+  color: #0d0d0d;
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+
+}
+
+.edit-btn:hover {
+  border: 3px solid blue;
+  color: blue;
+}
+
+.delete-btn:hover {
+  border: 3px solid red;
+  color: red;
+}
+
 
     /* ==========================================================================
 Navigation Style
@@ -390,10 +412,10 @@ Contact Us Style
 #contact form {
   margin: 40px 0;
 }
-#contact .form-group {
+#contact .form-group, .form-group {
   margin-bottom: 35px;
 }
-#contact .form-control {
+#contact .form-control, .form-control {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
@@ -402,11 +424,28 @@ Contact Us Style
   min-height: 45px;
 }
 #contact textarea {
-  height: 140px;
+  height: 80px;
   resize: none;
 }
 
+.authform {
+  margin-top: 6%;
+  margin-bottom: 6%;
+}
 
+    /* ==========================================================================
+Profile Styles
+========================================================================== */
+
+.panel-heading a:after {
+    font-family:'Glyphicons Halflings';
+    content:"\e114";
+    float: right;
+    color: grey;
+}
+.panel-heading a.collapsed:after {
+    content:"\e080";
+}
     /* ==========================================================================
 Footer Map Style
 ========================================================================== */

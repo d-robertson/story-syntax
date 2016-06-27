@@ -99,11 +99,11 @@ $(document).ready(function () {
     google.maps.event.addDomListener(window, 'load', initialize);
 
     /***************** Wow.js ******************/
-    
+
     new WOW().init();
-    
+
     /***************** Preloader ******************/
-    
+
     var preloader = $('.preloader');
     $(window).load(function () {
         preloader.remove();
