@@ -44,7 +44,10 @@ app.get('/profile', isLoggedIn, function(req, res) {
       then: req.session.tempThen,
       userId: req.user.id
     }).then(function(){
-      db.story.findAll().then(function(stories) {
+      db.story.findAll({
+        where: { userId: req.user.id }
+        })
+      .then(function(stories) {
         console.log(stories);
         res.render('profile.ejs', { story: stories } );
       });
@@ -52,17 +55,20 @@ app.get('/profile', isLoggedIn, function(req, res) {
     console.log(req.session.tempTitle)
     req.session.isUsed = false;
   }else{
-    db.story.findAll().then(function(stories) {
+    db.story.findAll({
+      where: { userId: req.user.id }
+      })
+      .then(function(stories) {
       console.log(stories);
       res.render('profile.ejs', { story: stories } );
-
     });
   }
 });
 
 app.use('/auth', require('./controllers/auth'));
 
-//  and set local value to true
+// creates a story in the database from user input unless the session storage variable is set to true.
+// If session variable .isUsed is set to false it takes data
 app.post('/profile', function(req, res) {
   if (req.user) {
     db.story.create({
@@ -89,6 +95,40 @@ app.post('/profile', function(req, res) {
   res.redirect('/auth/login');
 }
 });
+
+app.get('/profile/edit/:id', function(req, res) {
+// GET /projects/:id - display a specific project
+db.story.find({
+    where: { id: req.params.id }
+  })
+  .then(function(story) {
+    if (req.user.id !== story.userId) throw Error();
+    res.render('edit.ejs', { story: story });
+  })
+  .catch(function(error) {
+    res.status(400).render('404.ejs');
+  });
+});
+
+app.put('/profile/edit/:id', function(req, res) {
+  db.story.update({
+    title: req.body.title,
+    given: req.body.given,
+    when: req.body.when,
+    and: req.body.and,
+    then: req.body.then,
+  },
+  {
+    where: { id: req.params.id }
+  })
+  .success(function () {
+    res.redirect('/profile');
+  }).catch(function(error) {
+    res.status(400).render('404.ejs');
+  });
+});
+
+
 
 var server = app.listen(process.env.PORT || 3000);
 

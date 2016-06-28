@@ -27,7 +27,7 @@
     </div>
   </nav>
 </section>
-<% console.log('##############' + story) %>
+<% console.log(story) %>
 <div class="container">
   <div class="authform col-md-6 col-md-offset-3">
     <% story.forEach(function(story) { %>
@@ -47,7 +47,7 @@
               <%= story.and  %> <br>
               <%= story.then %> <br>
               <div class="ud-button">
-                <a class="btn btn-transparent edit-btn" href="#">Edit</a>
+                <a class="btn btn-transparent edit-btn" href="/profile/edit/<%= story.id %>">Edit</a>
                 <a class="btn btn-light delete-btn" href="#">Delete</a>
               </div>
             </div>
