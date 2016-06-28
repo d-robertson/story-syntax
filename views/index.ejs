@@ -121,7 +121,7 @@
         <hr class="sep">
         <p>Enter Your Story</p>
         <div class="col-md-6 col-md-offset-3 wow fadeInUp" data-wow-delay=".3s">
-            <form method="POST" action="/">
+            <form method="POST" action="/profile">
                 <div class="form-group">
                     <label for="Title">Title</label>
                     <input type="text" name="title" class="form-control" id="Title" placeholder="Story Title Example: [Persona name] should (not) be able to [overarching action]">
@@ -132,11 +132,11 @@
                 <div class="form-group">
                     <textarea name="when" class="form-control" rows="1" placeholder="WHEN [action] Example: I click an empty game board space"></textarea>
                 </div>
-                <div name="and" class="form-group">
-                    <textarea class="form-control" rows="1" placeholder="Example: And it's my turn"></textarea>
+                <div class="form-group">
+                    <textarea name="and" class="form-control" rows="1" placeholder="Example: And it's my turn"></textarea>
                 </div>
-                <div name="then" class="form-group">
-                    <textarea class="form-control" rows="1" placeholder="THEN [reaction]"></textarea>
+                <div class="form-group">
+                    <textarea name="then" class="form-control" rows="1" placeholder="THEN [reaction]"></textarea>
                 </div>
                 <input class="btn-block" type="submit" value="Create Story" >
             </form>

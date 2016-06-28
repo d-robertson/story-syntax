@@ -29,7 +29,9 @@ module.exports = function(sequelize, DataTypes) {
           msg: 'Name must be between 1 and 254 characters'
         }
       }
-    }
+    },
+    facebookToken: DataTypes.STRING,
+    facebookId: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
@@ -49,6 +51,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     hooks: {
       beforeCreate: function(createdUser, options, cb) {
+        if (!createdUser.password) return cb(null, createdUser);
         var hash = bcrypt.hashSync(createdUser.password, 10);
         createdUser.password = hash;
         cb(null, createdUser);

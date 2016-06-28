@@ -33,23 +33,61 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+// add check if local storage has stuff in it i.e. localstorage boolean flag. Then do a find all items in localstorage and create story same as db.story post route then change req.body to localStorage.variable, then set local to false.
 app.get('/profile', isLoggedIn, function(req, res) {
-  res.render('profile');
+  if (req.session.isUsed) {
+    db.story.create({
+      title: req.session.tempTitle,
+      given: req.session.tempGiven,
+      when: req.session.tempWhen,
+      and: req.session.tempAnd,
+      then: req.session.tempThen,
+      userId: req.user.id
+    }).then(function(){
+      db.story.findAll().then(function(stories) {
+        console.log(stories);
+        res.render('profile.ejs', { story: stories } );
+      });
+    });
+    console.log(req.session.tempTitle)
+    req.session.isUsed = false;
+  }else{
+    db.story.findAll().then(function(stories) {
+      console.log(stories);
+      res.render('profile.ejs', { story: stories } );
+
+    });
+  }
 });
 
 app.use('/auth', require('./controllers/auth'));
 
-app.post('/', function(req, res) {
-  console.log('*******************', req.body.title);
-  db.story.Create({
+//  and set local value to true
+app.post('/profile', function(req, res) {
+  if (req.user) {
+    db.story.create({
     title: req.body.title,
     given: req.body.given,
     when: req.body.when,
     and: req.body.and,
-    then: req.body.then
+    then: req.body.then,
+    userId: req.user.id
   }).done(function(story) {
-  console.log('&&&&&&&&&&&&&&&&&&&&&&&', story);
+    console.log(story);
+  res.redirect('/profile');
   });
+} else {
+  req.flash('error', 'Please login to view your user stories.');
+
+  req.session.tempTitle = req.body.title;
+  req.session.tempGiven = req.body.given;
+  req.session.tempWhen = req.body.when;
+  req.session.tempAnd = req.body.and;
+  req.session.tempThen = req.body.then;
+  req.session.isUsed = true;
+  console.log(req.session.tempTitle);
+  res.redirect('/auth/login');
+}
 });
 
 var server = app.listen(process.env.PORT || 3000);

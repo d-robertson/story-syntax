@@ -27,61 +27,33 @@
     </div>
   </nav>
 </section>
+<% console.log('##############' + story) %>
 <div class="container">
   <div class="authform col-md-6 col-md-offset-3">
-    <div class="panel-group" id="accordion">
-      <div class="panel panel-default" id="panel1">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-          <a data-toggle="collapse" data-target="#collapseOne"
-            href="#collapseOne">
-            Story Title: Add Magic Tags Here
-          </a>
-          </h4>
-        </div>
-        <div id="collapseOne" class="panel-collapse collapse in">
-          <div class="panel-body">This accordion should be in 1 for loop that iterates through all of the stories associated with the logged in user. The syntax should read visually as...
-          <br>GIVEN some precondition <br>
-          WHEN some action by the user <br>
-          AND some precondition <br>
-          THEN  some action <br>
-          <div class="ud-button">
-            <a class="btn btn-transparent edit-btn" href="#">Edit</a>
-            <a class="btn btn-light delete-btn" href="#">Delete</a>
+    <% story.forEach(function(story) { %>
+      <div class="panel-group" id="accordion">
+        <div class="panel panel-default" id="panel1">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#collapseOne"
+              href="#collapseOne">
+              <%= story.title %>
+            </a>
+            </h4>
           </div>
-          </div>
-        </div>
-      </div>
-      <div class="panel panel-default" id="panel2">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-          <a data-toggle="collapse" data-target="#collapseTwo"
-            href="#collapseTwo" class="collapsed">
-            Story Title: Add Magic Tags Here
-          </a>
-          </h4>
-        </div>
-        <div id="collapseTwo" class="panel-collapse collapse">
-          <div class="panel-body">GIVEN some precondition <br>
-          WHEN some action by the user <br>
-          AND some precondition <br>
-          THEN  some action <br>
+          <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body"><%= story.given %> <br>
+              <%= story.when %> <br>
+              <%= story.and  %> <br>
+              <%= story.then %> <br>
+              <div class="ud-button">
+                <a class="btn btn-transparent edit-btn" href="#">Edit</a>
+                <a class="btn btn-light delete-btn" href="#">Delete</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="panel panel-default" id="panel3">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-          <a data-toggle="collapse" data-target="#collapseThree"
-            href="#collapseThree" class="collapsed">
-            Story Title: Add Magic Tags Here
-          </a>
-          </h4>
-        </div>
-        <div id="collapseThree" class="panel-collapse collapse">
-          <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
-        </div>
-      </div>
-    </div>
+      <% }); %>
   </div>
 </div>

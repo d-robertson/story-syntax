@@ -222,6 +222,10 @@ Navigation Style
   color: #a3a3a3;
 }
 
+.navbar-brand > img {
+  width: 75%;
+}
+
 .top-nav-collapse {
   background: #24242a;
 }
@@ -229,8 +233,8 @@ Navigation Style
   height: auto;
 }
 .top-nav-collapse .navbar-brand img {
-  width: 52px;
-  height: 52px;
+  width: 65%;
+  height: 65%;
 }
 .top-nav-collapse .nav > li > a {
   padding: 30px 15px;
