@@ -110,7 +110,7 @@ db.story.find({
   });
 });
 
-app.put('/profile/edit/:id', function(req, res) {
+app.post('/profile/edit/:id', function(req, res) {
   db.story.update({
     title: req.body.title,
     given: req.body.given,
@@ -120,10 +120,19 @@ app.put('/profile/edit/:id', function(req, res) {
   },
   {
     where: { id: req.params.id }
-  })
-  .success(function () {
+  }).then(function (result) {
     res.redirect('/profile');
-  }).catch(function(error) {
+  }, function(rejectPromiseError) {
+    res.status(400).render('404.ejs');
+  });
+});
+
+app.get('/profile/delete/:id', function(req, res) {
+  db.story.destroy({
+    where: { id: req.params.id }
+  }).then(function (result) {
+    res.redirect('/profile');
+  }, function(rejectPromiseError) {
     res.status(400).render('404.ejs');
   });
 });

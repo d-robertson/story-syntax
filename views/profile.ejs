@@ -48,7 +48,9 @@
               <%= story.then %> <br>
               <div class="ud-button">
                 <a class="btn btn-transparent edit-btn" href="/profile/edit/<%= story.id %>">Edit</a>
-                <a class="btn btn-light delete-btn" href="#">Delete</a>
+                <form action="/profile/delete/<%= story.id %>" method="DELETE" accept-charset="utf-8">
+                <input class="btn btn-light delete-btn" type="submit" value="Delete">
+                </form>
               </div>
             </div>
           </div>
