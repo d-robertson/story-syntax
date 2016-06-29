@@ -90,6 +90,12 @@ $(document).ready(function () {
 
     // new WOW().init();
 
+    /***************** Bootstrap Tooltip ******************/
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+
     /***************** Preloader ******************/
 
     var preloader = $('.preloader');

@@ -40,7 +40,7 @@ router.get('/facebook', passport.authenticate('facebook', {
 }));
 
 router.get('/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: '/',
+  successRedirect: '/profile',
   failureRedirect: '/auth/login',
   failureFlash: 'An error occurred, please try later',
   successFlash: 'You have logged in with Facebook'

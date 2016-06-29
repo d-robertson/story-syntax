@@ -39,7 +39,7 @@
                 <h1>Tell Your <span>Story</span></h1>
                 <hr class="light-sep">
                 <h6>A framework for writing modern User Stories</h6>
-                <a class="btn btn-transparent" href="#">Learn More</a>
+                <a class="btn btn-transparent" href="/#contact">Create Your Story</a>
             </div>
         </div>
     </div>
@@ -119,7 +119,7 @@
     <div class="container">
         <h2>User Story</h2>
         <hr class="sep">
-        <p>Enter Your Story</p>
+        <p>Create Your Story</p>
         <div class="col-md-6 col-md-offset-3 wow fadeInUp" data-wow-delay=".3s">
             <form method="POST" action="/profile">
                 <div class="form-group">
@@ -127,7 +127,9 @@
                     <input type="text" name="title" class="form-control" id="Title" placeholder="Story Title Example: [Persona name] should (not) be able to [overarching action]">
                 </div>
                 <div class="form-group">
-                    <textarea name="given" class="form-control" rows="1" placeholder="GIVEN [necessary context and preconditions for story] Example: GIVEN that I’m a Connect 4 Player, I need to be able to play a game piece on the game board."></textarea>
+                    <label for="GIVEN">GIVEN:</label>
+                    <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="GIVEN is the necessary context and preconditions for story"></i>
+                    <textarea name="given" class="form-control" rows="1" placeholder="that I’m a Connect 4 Player, I need to be able to play a game piece on the game board."></textarea>
                 </div>
                 <div class="form-group">
                     <textarea name="when" class="form-control" rows="1" placeholder="WHEN [action] Example: I click an empty game board space"></textarea>

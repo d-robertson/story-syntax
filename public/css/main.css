@@ -23,6 +23,9 @@ body {
   margin-bottom: 40px;
 }
 
+.spacer {
+  padding-top: 9%;
+}
 /* ==========================================================================
 Typography
 ========================================================================== */
@@ -175,6 +178,10 @@ Buttons Styles
   color: red;
 }
 
+.fb-btn {
+  background-color: #4267b2;
+  text-align: center;
+}
 
     /* ==========================================================================
 Navigation Style
@@ -376,6 +383,8 @@ Services Style
 }
 #services .services-box .col-md-4 {
   margin-bottom: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 #services .services-box .col-md-4 .media-left,
 #services .services-box .col-md-4 .media-right,
@@ -408,14 +417,21 @@ Contact Us Style
 ========================================================================== */
 #contact {
   padding: 60px 0;
-  text-align: center;
 }
 #contact h2 {
   text-transform: uppercase;
+  text-align: center;
 }
+
+#contact p {
+  text-align: center;
+}
+
 #contact form {
   margin: 40px 0;
+
 }
+
 #contact .form-group, .form-group {
   margin-bottom: 35px;
 }
@@ -432,24 +448,23 @@ Contact Us Style
   resize: none;
 }
 
+#contact label {
+  float: left;
+  display: inline;
+}
+
+#contact i {
+  float: right;
+  display: inline;
+}
+
 .authform {
   margin-top: 6%;
   margin-bottom: 6%;
 }
 
-    /* ==========================================================================
-Profile Styles
-========================================================================== */
 
-.panel-heading a:after {
-    font-family:'Glyphicons Halflings';
-    content:"\e114";
-    float: right;
-    color: grey;
-}
-.panel-heading a.collapsed:after {
-    content:"\e080";
-}
+
     /* ==========================================================================
 Footer Map Style
 ========================================================================== */
@@ -483,6 +498,7 @@ footer h6 {
   text-transform: uppercase;
   color: #fff;
 }
+
 
     /* ==========================================================================
 Media Queries Style
