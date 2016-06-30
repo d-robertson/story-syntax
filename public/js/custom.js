@@ -96,6 +96,14 @@ $(document).ready(function () {
       $('[data-toggle="tooltip"]').tooltip()
     });
 
+    /***************** Hide Nav Items On Login  ******************/
+
+//     $('#signup-del').hide(function(){
+//       if(req.user.id === req.user);
+// });
+    // if (req.user.id)
+    //   $( "#signup-del" ).hide();
+
     /***************** Preloader ******************/
 
     var preloader = $('.preloader');

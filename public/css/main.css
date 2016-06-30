@@ -159,11 +159,22 @@ Buttons Styles
 .ud-button {
   margin: 25px 0 25px 150px;
 }
-.edit-btn, .delete-btn {
+.edit-btn {
   border: 3px solid #24242a;
   color: #0d0d0d;
-  display: inline-block;
-  margin: auto;
+  display: inline;
+  margin: 0 3% 0 -10%;
+  text-align: center;
+  padding-right: 47px;
+  float: left;
+
+}
+
+.delete-btn {
+  border: 3px solid #24242a;
+  color: #0d0d0d;
+  display: inline;
+  margin-right: 20%;
   text-align: center;
 
 }
@@ -230,7 +241,10 @@ Navigation Style
 }
 
 .navbar-brand > img {
-  width: 75%;
+  width: 120%;
+  height: 120%;
+  margin-top: 12%;
+
 }
 
 .top-nav-collapse {
@@ -240,8 +254,9 @@ Navigation Style
   height: auto;
 }
 .top-nav-collapse .navbar-brand img {
-  width: 65%;
-  height: 65%;
+  width: 95%;
+  height: 95%;
+  margin-top: 10%;
 }
 .top-nav-collapse .nav > li > a {
   padding: 30px 15px;
@@ -415,19 +430,23 @@ Services Style
     /* ==========================================================================
 Contact Us Style
 ========================================================================== */
-#contact {
+#contact, #edit-form {
   padding: 60px 0;
 }
-#contact h2 {
+
+#edit-form {
+  margin-top: 65px;
+}
+#contact h2, #edit-form h2 {
   text-transform: uppercase;
   text-align: center;
 }
 
-#contact p {
+#contact p, #edit-form p {
   text-align: center;
 }
 
-#contact form {
+#contact form, #edit-form form {
   margin: 40px 0;
 
 }
@@ -443,17 +462,17 @@ Contact Us Style
   color: #0d0d0d;
   min-height: 45px;
 }
-#contact textarea {
+#contact textarea, #edit-form textarea {
   height: 80px;
   resize: none;
 }
 
-#contact label {
+#contact label, #edit-form label {
   float: left;
   display: inline;
 }
 
-#contact i {
+#contact i, #edit-form i {
   float: right;
   display: inline;
 }

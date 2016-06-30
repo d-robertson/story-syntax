@@ -12,14 +12,12 @@
             </h4>
           </div>
           <div id="collapseOne" class="panel-collapse collapse in">
-            <div class="panel-body"><%= story.given %> <br>
-              <%= story.when %> <br>
-              <%= story.and  %> <br>
-              <%= story.then %> <br>
+            <div class="panel-body"><%- story.getFullStory(); %> <br>
               <div class="ud-button">
-                <a class="btn btn-transparent edit-btn" href="/profile/edit/<%= story.id %>">Edit</a>
+                <a class="btn btn-light edit-btn" href="/profile/edit/<%= story.id %>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Edit</a>
                 <form action="/profile/delete/<%= story.id %>" method="DELETE" accept-charset="utf-8">
-                <input class="btn btn-light delete-btn" type="submit" value="Delete">
+                <button class="btn btn-light delete-btn" type="submit"><i class="fa fa-trash-o" aria-hidden="true"></i>  Delete</button>
+
                 </form>
               </div>
             </div>
