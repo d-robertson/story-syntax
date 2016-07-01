@@ -381,7 +381,7 @@ Welcome Style
 
 
     /* ==========================================================================
-Services Style
+Benefits Style
 ========================================================================== */
 #services {
   background: #24242a;
@@ -430,7 +430,7 @@ Services Style
 
 
     /* ==========================================================================
-Contact Us Style
+Form Style
 ========================================================================== */
 #contact, #edit-form {
   padding: 60px 0;
@@ -487,7 +487,7 @@ Contact Us Style
 
 
     /* ==========================================================================
-Footer Map Style
+Footer Style
 ========================================================================== */
 footer {
   background: #24242a;
@@ -497,23 +497,6 @@ footer {
 footer h1 {
   text-transform: uppercase;
   font-weight: 700;
-}
-footer .social {
-  margin: 40px 0;
-}
-footer .social a {
-  color: #fff;
-  margin-left: 20px;
-  margin-right: 20px;
-  -moz-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-footer .social a:hover,
-footer .social a:focus,
-footer .social a:active {
-  color: #a3a3a3;
 }
 footer h6 {
   text-transform: uppercase;

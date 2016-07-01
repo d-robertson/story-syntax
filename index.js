@@ -1,3 +1,5 @@
+// Setting up and requiring Node Modules that are/will be used in this project.
+
 var express = require('express');
 var ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
@@ -27,13 +29,18 @@ app.use(function(req, res, next) {
   next();
 });
 
+// Including / Enabling use of items in the public folder i.e. CSS, IMG, JS
 app.use(express.static(__dirname + '/public/'));
 
+// Home route that renders the homepage.
 app.get('/', function(req, res) {
   res.render('index');
 });
 
-// add check if local storage has stuff in it i.e. localstorage boolean flag. Then do a find all items in localstorage and create story same as db.story post route then change req.body to localStorage.variable, then set local to false.
+// Profile route that renders a user's profile with all of their stories. This also checks to see if the user
+// has anything stored in session storage. This will allow people to use the site before
+// creating an account. If session storage is being, it will post a story that is saved
+// in sesssion to the DB. Profile can only be accessed if the user is loggedIn.
 app.get('/profile', isLoggedIn, function(req, res) {
   if (req.session.isUsed) {
     db.story.create({
@@ -67,8 +74,12 @@ app.get('/profile', isLoggedIn, function(req, res) {
 
 app.use('/auth', require('./controllers/auth'));
 
-// creates a story in the database from user input unless the session storage variable is set to true.
-// If session variable .isUsed is set to false it takes data
+// This post route creates a story in the database from user input and redirects user
+// to their profile to see confirmation of the story creation. If a user is not already
+// logged in, then it will store the user's input in session storage, and then redirect
+// the user to login. The if statement checks to see if user has the proper permissions
+// to view a specific story i.e. it will only display user stories associated with
+// the user's id.
 app.post('/profile', function(req, res) {
   if (req.user) {
     db.story.create({
@@ -96,8 +107,11 @@ app.post('/profile', function(req, res) {
   }
 });
 
+// This get route renders a page that allows the user to edit a story they created.
+// The if statement checks to ensure the user has the proper permissions to edit
+// a user story. There is also a built-in 404 easter egg to encapsulate how I felt while
+// creating this project. This will be updated before employer presentations.
 app.get('/profile/edit/:id', function(req, res) {
-// GET /projects/:id - display a specific project
   db.story.find({
     where: { id: req.params.id }
   })
@@ -110,6 +124,7 @@ app.get('/profile/edit/:id', function(req, res) {
   });
 });
 
+// This post route will update a user story. This also has the 404 easter egg.
 app.post('/profile/edit/:id', function(req, res) {
   db.story.update({
     title: req.body.title,
@@ -127,6 +142,8 @@ app.post('/profile/edit/:id', function(req, res) {
     });
 });
 
+// This post route delete a user story associated with a user's account. User's
+// must be logged in to be able to delete or edit a user story. 404 easter egg.
 app.post('/profile/delete/:id', function(req, res) {
   db.story.destroy({
     where: { id: req.params.id }
