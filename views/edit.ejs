@@ -28,7 +28,7 @@
         <div class="form-group">
           <label for="AND">AND...</label>
           <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="AND is optional and provides additional conditions. If you find yourself writing multiple “and”s in the acceptance criteria, that is a smell test that indicates you should split the story into two or more."></i>
-          <textarea placeholder="And my turn should end. (Optional)" name="and" class="form-control" rows="1" ><%= story.and  %></textarea>
+          <textarea required placeholder="And my turn should end." name="and" class="form-control" rows="1" ><%= story.and  %></textarea>
         </div>
         <input class="btn-block" type="submit" value="Update Story" >
       </form>
