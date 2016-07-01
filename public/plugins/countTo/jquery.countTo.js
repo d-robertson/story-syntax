@@ -1,18 +1,18 @@
 (function (factory) {
-    if (typeof define === 'function' && define.amd) {
+  if (typeof define === 'function' && define.amd) {
         // AMD
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
         // CommonJS
-        factory(require('jquery'));
-    } else {
+    factory(require('jquery'));
+  } else {
         // Browser globals
-        factory(jQuery);
-    }
+    factory(jQuery);
+  }
 }(function ($) {
   var CountTo = function (element, options) {
     this.$element = $(element);
-    this.options  = $.extend({}, CountTo.DEFAULTS, this.dataOptions(), options);
+    this.options = $.extend({}, CountTo.DEFAULTS, this.dataOptions(), options);
     this.init();
   };
 
@@ -28,19 +28,19 @@
   };
 
   CountTo.prototype.init = function () {
-    this.value     = this.options.from;
-    this.loops     = Math.ceil(this.options.speed / this.options.refreshInterval);
+    this.value = this.options.from;
+    this.loops = Math.ceil(this.options.speed / this.options.refreshInterval);
     this.loopCount = 0;
     this.increment = (this.options.to - this.options.from) / this.loops;
   };
 
   CountTo.prototype.dataOptions = function () {
     var options = {
-      from:            this.$element.data('from'),
-      to:              this.$element.data('to'),
-      speed:           this.$element.data('speed'),
+      from: this.$element.data('from'),
+      to: this.$element.data('to'),
+      speed: this.$element.data('speed'),
       refreshInterval: this.$element.data('refresh-interval'),
-      decimals:        this.$element.data('decimals')
+      decimals: this.$element.data('decimals')
     };
 
     var keys = Object.keys(options);
@@ -113,11 +113,11 @@
 
   $.fn.countTo = function (option) {
     return this.each(function () {
-      var $this   = $(this);
-      var data    = $this.data('countTo');
-      var init    = !data || typeof(option) === 'object';
+      var $this = $(this);
+      var data = $this.data('countTo');
+      var init = !data || typeof(option) === 'object';
       var options = typeof(option) === 'object' ? option : {};
-      var method  = typeof(option) === 'string' ? option : 'start';
+      var method = typeof(option) === 'string' ? option : 'start';
 
       if (init) {
         if (data) data.stop();

@@ -12,20 +12,19 @@
 
 // Uses Node, AMD or browser globals to create a module.
 (function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
+  if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like environments that support module.exports,
         // like Node.
-        module.exports = factory(require('jquery'));
-    } else {
+    module.exports = factory(require('jquery'));
+  } else {
         // Browser globals (root is window)
-        root.lightbox = factory(root.jQuery);
-    }
+    root.lightbox = factory(root.jQuery);
+  }
 }(this, function ($) {
-
   function Lightbox(options) {
     this.album = [];
     this.currentImageIndex = void 0;
@@ -81,10 +80,10 @@
     $('<div id="lightboxOverlay" class="lightboxOverlay"></div><div id="lightbox" class="lightbox"><div class="lb-outerContainer"><div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" /><div class="lb-nav"><a class="lb-prev" href="" ></a><a class="lb-next" href="" ></a></div><div class="lb-loader"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div>').appendTo($('body'));
 
     // Cache jQuery objects
-    this.$lightbox       = $('#lightbox');
-    this.$overlay        = $('#lightboxOverlay');
+    this.$lightbox = $('#lightbox');
+    this.$overlay = $('#lightboxOverlay');
     this.$outerContainer = this.$lightbox.find('.lb-outerContainer');
-    this.$container      = this.$lightbox.find('.lb-container');
+    this.$container = this.$lightbox.find('.lb-container');
 
     // Store css values for future lookup
     this.containerTopPadding = parseInt(this.$container.css('padding-top'), 10);
@@ -138,7 +137,7 @@
 
   // Show overlay and lightbox. If the image is part of a set, add siblings to album array.
   Lightbox.prototype.start = function($link) {
-    var self    = this;
+    var self = this;
     var $window = $(window);
 
     $window.on('resize', $.proxy(this.sizeOverlay, this));
@@ -188,7 +187,7 @@
     }
 
     // Position Lightbox
-    var top  = $window.scrollTop() + this.options.positionFromTop;
+    var top = $window.scrollTop() + this.options.positionFromTop;
     var left = $window.scrollLeft();
     this.$lightbox.css({
       top: top + 'px',
@@ -234,9 +233,9 @@
         // Fit image inside the viewport.
         // Take into account the border around the image and an additional 10px gutter on each side.
 
-        windowWidth    = $(window).width();
-        windowHeight   = $(window).height();
-        maxImageWidth  = windowWidth - self.containerLeftPadding - self.containerRightPadding - 20;
+        windowWidth = $(window).width();
+        windowHeight = $(window).height();
+        maxImageWidth = windowWidth - self.containerLeftPadding - self.containerRightPadding - 20;
         maxImageHeight = windowHeight - self.containerTopPadding - self.containerBottomPadding - 120;
 
         // Check if image size is larger then maxWidth|maxHeight in settings
@@ -250,7 +249,7 @@
         // Is there a fitting issue?
         if ((preloader.width > maxImageWidth) || (preloader.height > maxImageHeight)) {
           if ((preloader.width / maxImageWidth) > (preloader.height / maxImageHeight)) {
-            imageWidth  = maxImageWidth;
+            imageWidth = maxImageWidth;
             imageHeight = parseInt(preloader.height / (preloader.width / imageWidth), 10);
             $image.width(imageWidth);
             $image.height(imageHeight);
@@ -265,7 +264,7 @@
       self.sizeContainer($image.width(), $image.height());
     };
 
-    preloader.src          = this.album[imageNumber].link;
+    preloader.src = this.album[imageNumber].link;
     this.currentImageIndex = imageNumber;
   };
 
@@ -280,9 +279,9 @@
   Lightbox.prototype.sizeContainer = function(imageWidth, imageHeight) {
     var self = this;
 
-    var oldWidth  = this.$outerContainer.outerWidth();
+    var oldWidth = this.$outerContainer.outerWidth();
     var oldHeight = this.$outerContainer.outerHeight();
-    var newWidth  = imageWidth + this.containerLeftPadding + this.containerRightPadding;
+    var newWidth = imageWidth + this.containerLeftPadding + this.containerRightPadding;
     var newHeight = imageHeight + this.containerTopPadding + this.containerBottomPadding;
 
     function postResize() {
@@ -406,12 +405,12 @@
   };
 
   Lightbox.prototype.keyboardAction = function(event) {
-    var KEYCODE_ESC        = 27;
-    var KEYCODE_LEFTARROW  = 37;
+    var KEYCODE_ESC = 27;
+    var KEYCODE_LEFTARROW = 37;
     var KEYCODE_RIGHTARROW = 39;
 
     var keycode = event.keyCode;
-    var key     = String.fromCharCode(keycode).toLowerCase();
+    var key = String.fromCharCode(keycode).toLowerCase();
     if (keycode === KEYCODE_ESC || key.match(/x|o|c/)) {
       this.end();
     } else if (key === 'p' || keycode === KEYCODE_LEFTARROW) {

@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     instanceMethods: {
       getFullStory: function() {
-        return 'Given ' + this.given + '<br />'  + 'When ' + this.when + '<br /> ' + 'And ' + this.and + '<br /> ' + 'Then ' + this.then;
+        return 'Given ' + this.given + '<br />' + 'When ' + this.when + '<br /> ' + 'And ' + this.and + '<br /> ' + 'Then ' + this.then;
       }
     }
   });

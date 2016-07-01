@@ -50,43 +50,43 @@ passport.use(new FacebookStrategy({
      */
 
     // pull the email from the user's Facebook profile, if it exists
-    var email = profile.emails ? profile.emails[0].value : null;
+  var email = profile.emails ? profile.emails[0].value : null;
 
     // see if the user exists in the database by email
-    db.user.find({
-      where: { email: email },
-    }).then(function(existingUser) {
+  db.user.find({
+    where: { email: email }
+  }).then(function(existingUser) {
       // if the user exists already, link their existing account with their Facebook
-      if (existingUser && email) {
-        existingUser.update({
-          facebookId: profile.id,
-          facebookToken: accessToken
-        }).then(function(updatedUser) {
-          cb(null, updatedUser);
-        }).catch(cb);
-      } else {
+    if (existingUser && email) {
+      existingUser.update({
+        facebookId: profile.id,
+        facebookToken: accessToken
+      }).then(function(updatedUser) {
+        cb(null, updatedUser);
+      }).catch(cb);
+    } else {
         // if the user doesn't exist, findOrCreate the user on the user's Facebook id
-        db.user.findOrCreate({
-          where: { facebookId: profile.id },
-          defaults: {
-            facebookToken: accessToken,
-            name: profile.displayName,
-            email: email
-          }
-        }).spread(function(user, created) {
+      db.user.findOrCreate({
+        where: { facebookId: profile.id },
+        defaults: {
+          facebookToken: accessToken,
+          name: profile.displayName,
+          email: email
+        }
+      }).spread(function(user, created) {
           // if the user is created, we're done
-          if (created) {
-            return cb(null, user);
-          } else {
+        if (created) {
+          return cb(null, user);
+        } else {
             // if the user wasn't created, they exist. Update their access token
-            user.facebookToken = accessToken;
-            user.save().then(function() {
-              cb(null, user);
-            }).catch(cb);
-          }
-        }).catch(cb);
-      }
-    }).catch(cb)
-  }));
+          user.facebookToken = accessToken;
+          user.save().then(function() {
+            cb(null, user);
+          }).catch(cb);
+        }
+      }).catch(cb);
+    }
+  }).catch(cb);
+}));
 
 module.exports = passport;

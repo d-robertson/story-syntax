@@ -1,113 +1,96 @@
 $(document).ready(function () {
-    /***************** Navbar-Collapse ******************/
+    /** *************** Navbar-Collapse ******************/
 
-    $(window).scroll(function () {
-        if ($(".navbar").offset().top > 50) {
-            $(".navbar-fixed-top").addClass("top-nav-collapse");
-        } else {
-            $(".navbar-fixed-top").removeClass("top-nav-collapse");
-        }
+  $(window).scroll(function () {
+    if ($('.navbar').offset().top > 50) {
+      $('.navbar-fixed-top').addClass('top-nav-collapse');
+    } else {
+      $('.navbar-fixed-top').removeClass('top-nav-collapse');
+    }
+  });
+
+    /** *************** Page Scroll ******************/
+
+  $(function () {
+    $('a.page-scroll').bind('click', function (event) {
+      var $anchor = $(this);
+      $('html, body').stop().animate({
+        scrollTop: $($anchor.attr('href')).offset().top
+      }, 1500, 'easeInOutExpo');
+      event.preventDefault();
     });
+  });
 
-    /***************** Page Scroll ******************/
+    /** *************** Scroll Spy ******************/
 
-    $(function () {
-        $('a.page-scroll').bind('click', function (event) {
-            var $anchor = $(this);
-            $('html, body').stop().animate({
-                scrollTop: $($anchor.attr('href')).offset().top
-            }, 1500, 'easeInOutExpo');
-            event.preventDefault();
-        });
-    });
+  $('body').scrollspy({
+    target: '.navbar-fixed-top',
+    offset: 51
+  });
 
-    /***************** Scroll Spy ******************/
+    /** *************** Owl Carousel ******************/
 
-    $('body').scrollspy({
-        target: '.navbar-fixed-top',
-        offset: 51
-    })
+  $('#owl-hero').owlCarousel({
 
-    /***************** Owl Carousel ******************/
+    navigation: true, // Show next and prev buttons
+    slideSpeed: 300,
+    paginationSpeed: 400,
+    singleItem: true,
+    transitionStyle: 'fadeUp',
+    autoPlay: true,
+    navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
 
-    $("#owl-hero").owlCarousel({
-
-        navigation: true, // Show next and prev buttons
-        slideSpeed: 300,
-        paginationSpeed: 400,
-        singleItem: true,
-        transitionStyle: "fadeUp",
-        autoPlay: true,
-        navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
-
-    });
+  });
 
 
-    /***************** Full Width Slide ******************/
+    /** *************** Full Width Slide ******************/
 
-    var slideHeight = $(window).height();
+  var slideHeight = $(window).height();
 
+  $('#owl-hero .item').css('height', slideHeight);
+
+  $(window).resize(function () {
     $('#owl-hero .item').css('height', slideHeight);
+  });
 
-    $(window).resize(function () {
-        $('#owl-hero .item').css('height', slideHeight);
-    });
-    /***************** Owl Carousel Testimonials ******************/
+    /** *************** Countdown ******************/
 
-    $("#owl-testi").owlCarousel({
-
-        navigation: false, // Show next and prev buttons
-        paginationSpeed: 400,
-        singleItem: true,
-        transitionStyle: "backSlide",
-        autoPlay: true
-
-    });
-    /***************** Countdown ******************/
-
-    $('#fun-facts').bind('inview', function (event, visible, visiblePartX, visiblePartY) {
-        if (visible) {
-            $(this).find('.timer').each(function () {
-                var $this = $(this);
-                $({
-                    Counter: 0
-                }).animate({
-                    Counter: $this.text()
-                }, {
-                    duration: 2000,
-                    easing: 'swing',
-                    step: function () {
-                        $this.text(Math.ceil(this.Counter));
-                    }
-                });
-            });
-            $(this).unbind('inview');
-        }
-    });
+  $('#fun-facts').bind('inview', function (event, visible, visiblePartX, visiblePartY) {
+    if (visible) {
+      $(this).find('.timer').each(function () {
+        var $this = $(this);
+        $({
+          Counter: 0
+        }).animate({
+          Counter: $this.text()
+        }, {
+          duration: 2000,
+          easing: 'swing',
+          step: function () {
+            $this.text(Math.ceil(this.Counter));
+          }
+        });
+      });
+      $(this).unbind('inview');
+    }
+  });
 
 
-    /***************** Wow.js ******************/
+    /** *************** Wow.js ******************/
 
     // new WOW().init();
 
-    /***************** Bootstrap Tooltip ******************/
+    /** *************** Bootstrap Tooltip ******************/
 
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    });
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
 
-    /***************** Hide Nav Items On Login  ******************/
 
-//     $('#signup-del').hide(function(){
-//       if(req.user.id === req.user);
-// });
-    // if (req.user.id)
-    //   $( "#signup-del" ).hide();
+    /** *************** Preloader ******************/
 
-    /***************** Preloader ******************/
-
-    var preloader = $('.preloader');
-    $(window).load(function () {
-        preloader.remove();
-    });
-})
+  var preloader = $('.preloader');
+  $(window).load(function () {
+    preloader.remove();
+  });
+});

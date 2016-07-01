@@ -15,9 +15,8 @@
             <div class="panel-body"><%- story.getFullStory(); %> <br>
               <div class="ud-button">
                 <a class="btn btn-light edit-btn" href="/profile/edit/<%= story.id %>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Edit</a>
-                <form action="/profile/delete/<%= story.id %>" method="DELETE" accept-charset="utf-8">
+                <form action="/profile/delete/<%= story.id %>" method="POST" accept-charset="utf-8">
                 <button class="btn btn-light delete-btn" type="submit"><i class="fa fa-trash-o" aria-hidden="true"></i>  Delete</button>
-
                 </form>
               </div>
             </div>

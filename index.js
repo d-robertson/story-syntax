@@ -2,10 +2,10 @@ var express = require('express');
 var ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var passport = require('./config/passportConfig')
+var passport = require('./config/passportConfig');
 var flash = require('connect-flash');
 var isLoggedIn = require('./middleware/isLoggedIn');
-var db = require('./models')
+var db = require('./models');
 var app = express();
 
 app.set('view engine', 'ejs');
@@ -43,25 +43,25 @@ app.get('/profile', isLoggedIn, function(req, res) {
       and: req.session.tempAnd,
       then: req.session.tempThen,
       userId: req.user.id
-    }).then(function(){
+    }).then(function() {
       db.story.findAll({
         where: { userId: req.user.id }
-        })
-      .then(function(stories) {
-        console.log(stories);
-        res.render('profile.ejs', { story: stories } );
-      });
-    });
-    console.log(req.session.tempTitle)
-    req.session.isUsed = false;
-  }else{
-    db.story.findAll({
-      where: { userId: req.user.id }
       })
       .then(function(stories) {
-      console.log(stories);
-      res.render('profile.ejs', { story: stories } );
+        console.log(stories);
+        res.render('profile.ejs', { story: stories });
+      });
     });
+    console.log(req.session.tempTitle);
+    req.session.isUsed = false;
+  } else {
+    db.story.findAll({
+      where: { userId: req.user.id }
+    })
+      .then(function(stories) {
+        console.log(stories);
+        res.render('profile.ejs', { story: stories });
+      });
   }
 });
 
@@ -72,33 +72,33 @@ app.use('/auth', require('./controllers/auth'));
 app.post('/profile', function(req, res) {
   if (req.user) {
     db.story.create({
-    title: req.body.title,
-    given: req.body.given,
-    when: req.body.when,
-    and: req.body.and,
-    then: req.body.then,
-    userId: req.user.id
-  }).done(function(story) {
-    console.log(story);
-  res.redirect('/profile');
-  });
-} else {
-  req.flash('error', 'Please login to view your user stories.');
+      title: req.body.title,
+      given: req.body.given,
+      when: req.body.when,
+      and: req.body.and,
+      then: req.body.then,
+      userId: req.user.id
+    }).done(function(story) {
+      console.log(story);
+      res.redirect('/profile');
+    });
+  } else {
+    req.flash('error', 'Please login to view your user stories.');
 
-  req.session.tempTitle = req.body.title;
-  req.session.tempGiven = req.body.given;
-  req.session.tempWhen = req.body.when;
-  req.session.tempAnd = req.body.and;
-  req.session.tempThen = req.body.then;
-  req.session.isUsed = true;
-  console.log(req.session.tempTitle);
-  res.redirect('/auth/login');
-}
+    req.session.tempTitle = req.body.title;
+    req.session.tempGiven = req.body.given;
+    req.session.tempWhen = req.body.when;
+    req.session.tempAnd = req.body.and;
+    req.session.tempThen = req.body.then;
+    req.session.isUsed = true;
+    console.log(req.session.tempTitle);
+    res.redirect('/auth/login');
+  }
 });
 
 app.get('/profile/edit/:id', function(req, res) {
 // GET /projects/:id - display a specific project
-db.story.find({
+  db.story.find({
     where: { id: req.params.id }
   })
   .then(function(story) {
@@ -116,18 +116,18 @@ app.post('/profile/edit/:id', function(req, res) {
     given: req.body.given,
     when: req.body.when,
     and: req.body.and,
-    then: req.body.then,
+    then: req.body.then
   },
-  {
-    where: { id: req.params.id }
-  }).then(function (result) {
-    res.redirect('/profile');
-  }, function(rejectPromiseError) {
-    res.status(400).render('404.ejs');
-  });
+    {
+      where: { id: req.params.id }
+    }).then(function (result) {
+      res.redirect('/profile');
+    }, function(rejectPromiseError) {
+      res.status(400).render('404.ejs');
+    });
 });
 
-app.get('/profile/delete/:id', function(req, res) {
+app.post('/profile/delete/:id', function(req, res) {
   db.story.destroy({
     where: { id: req.params.id }
   }).then(function (result) {
@@ -136,7 +136,6 @@ app.get('/profile/delete/:id', function(req, res) {
     res.status(400).render('404.ejs');
   });
 });
-
 
 
 var server = app.listen(process.env.PORT || 3000);

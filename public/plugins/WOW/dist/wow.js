@@ -1,6 +1,6 @@
 (function() {
   var MutationObserver, Util, WeakMap, getComputedStyle, getComputedStyleRX,
-    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    bind = function(fn, me) { return function() { return fn.apply(me, arguments); }; },
     indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   Util = (function() {
@@ -49,8 +49,8 @@
         return elem.dispatchEvent(event);
       } else if (event in (elem != null)) {
         return elem[event]();
-      } else if (("on" + event) in (elem != null)) {
-        return elem["on" + event]();
+      } else if (('on' + event) in (elem != null)) {
+        return elem['on' + event]();
       }
     };
 
@@ -58,7 +58,7 @@
       if (elem.addEventListener != null) {
         return elem.addEventListener(event, fn, false);
       } else if (elem.attachEvent != null) {
-        return elem.attachEvent("on" + event, fn);
+        return elem.attachEvent('on' + event, fn);
       } else {
         return elem[event] = fn;
       }
@@ -68,7 +68,7 @@
       if (elem.removeEventListener != null) {
         return elem.removeEventListener(event, fn, false);
       } else if (elem.detachEvent != null) {
-        return elem.detachEvent("on" + event, fn);
+        return elem.detachEvent('on' + event, fn);
       } else {
         return delete elem[event];
       }
@@ -83,7 +83,6 @@
     };
 
     return Util;
-
   })();
 
   WeakMap = this.WeakMap || this.MozWeakMap || (WeakMap = (function() {
@@ -118,15 +117,14 @@
     };
 
     return WeakMap;
-
   })());
 
   MutationObserver = this.MutationObserver || this.WebkitMutationObserver || this.MozMutationObserver || (MutationObserver = (function() {
     function MutationObserver() {
-      if (typeof console !== "undefined" && console !== null) {
+      if (typeof console !== 'undefined' && console !== null) {
         console.warn('MutationObserver is not supported by your browser.');
       }
-      if (typeof console !== "undefined" && console !== null) {
+      if (typeof console !== 'undefined' && console !== null) {
         console.warn('WOW.js cannot detect dom mutations, please call .sync() after loading new content.');
       }
     }
@@ -136,7 +134,6 @@
     MutationObserver.prototype.observe = function() {};
 
     return MutationObserver;
-
   })());
 
   getComputedStyle = this.getComputedStyle || function(el, pseudo) {
@@ -188,7 +185,7 @@
     WOW.prototype.init = function() {
       var ref;
       this.element = window.document.documentElement;
-      if ((ref = document.readyState) === "interactive" || ref === "complete") {
+      if ((ref = document.readyState) === 'interactive' || ref === 'complete') {
         this.start();
       } else {
         this.util().addEvent(document, 'DOMContentLoaded', this.start);
@@ -201,7 +198,7 @@
       this.stopped = false;
       this.boxes = (function() {
         var j, len, ref, results;
-        ref = this.element.querySelectorAll("." + this.config.boxClass);
+        ref = this.element.querySelectorAll('.' + this.config.boxClass);
         results = [];
         for (j = 0, len = ref.length; j < len; j++) {
           box = ref[j];
@@ -286,7 +283,7 @@
         return;
       }
       element = element.parentNode || element;
-      ref = element.querySelectorAll("." + this.config.boxClass);
+      ref = element.querySelectorAll('.' + this.config.boxClass);
       results = [];
       for (j = 0, len = ref.length; j < len; j++) {
         box = ref[j];
@@ -308,7 +305,7 @@
 
     WOW.prototype.show = function(box) {
       this.applyStyle(box);
-      box.className = box.className + " " + this.config.animateClass;
+      box.className = box.className + ' ' + this.config.animateClass;
       if (this.config.callback != null) {
         this.config.callback(box);
       }
@@ -389,21 +386,21 @@
       return box;
     };
 
-    WOW.prototype.vendors = ["moz", "webkit"];
+    WOW.prototype.vendors = ['moz', 'webkit'];
 
     WOW.prototype.vendorSet = function(elem, properties) {
       var name, results, value, vendor;
       results = [];
       for (name in properties) {
         value = properties[name];
-        elem["" + name] = value;
+        elem['' + name] = value;
         results.push((function() {
           var j, len, ref, results1;
           ref = this.vendors;
           results1 = [];
           for (j = 0, len = ref.length; j < len; j++) {
             vendor = ref[j];
-            results1.push(elem["" + vendor + (name.charAt(0).toUpperCase()) + (name.substr(1))] = value);
+            results1.push(elem['' + vendor + (name.charAt(0).toUpperCase()) + (name.substr(1))] = value);
           }
           return results1;
         }).call(this));
@@ -418,7 +415,7 @@
       ref = this.vendors;
       for (j = 0, len = ref.length; j < len; j++) {
         vendor = ref[j];
-        result = result || style.getPropertyCSSValue("-" + vendor + "-" + property);
+        result = result || style.getPropertyCSSValue('-' + vendor + '-' + property);
       }
       return result;
     };
@@ -507,7 +504,5 @@
     };
 
     return WOW;
-
   })();
-
 }).call(this);

@@ -16,11 +16,11 @@
   }
 }(function ($) {
   var inviewObjects = {}, viewportSize, viewportOffset,
-      d = document, w = window, documentElement = d.documentElement, expando = $.expando, timer;
+    d = document, w = window, documentElement = d.documentElement, expando = $.expando, timer;
 
   $.event.special.inview = {
     add: function(data) {
-      inviewObjects[data.guid + "-" + this[expando]] = { data: data, $element: $(this) };
+      inviewObjects[data.guid + '-' + this[expando]] = { data: data, $element: $(this) };
 
       // Use setInterval in order to also make sure this captures elements within
       // "overflow:scroll" elements or elements that appeared in the dom tree due to
@@ -33,17 +33,17 @@
       // Don't waste cycles with an interval until we get at least one element that
       // has bound to the inview event.
       if (!timer && !$.isEmptyObject(inviewObjects)) {
-         timer = setInterval(checkInView, 250);
+        timer = setInterval(checkInView, 250);
       }
     },
 
     remove: function(data) {
-      try { delete inviewObjects[data.guid + "-" + this[expando]]; } catch(e) {}
+      try { delete inviewObjects[data.guid + '-' + this[expando]]; } catch (e) {}
 
       // Clear interval when we no longer have any elements listening
       if ($.isEmptyObject(inviewObjects)) {
-         clearInterval(timer);
-         timer = null;
+        clearInterval(timer);
+        timer = null;
       }
     }
   };
@@ -61,7 +61,7 @@
           d.body; // Quirks
         size = {
           height: domObject.clientHeight,
-          width:  domObject.clientWidth
+          width: domObject.clientWidth
         };
       }
     }
@@ -71,8 +71,8 @@
 
   function getViewportOffset() {
     return {
-      top:  w.pageYOffset || documentElement.scrollTop   || d.body.scrollTop,
-      left: w.pageXOffset || documentElement.scrollLeft  || d.body.scrollLeft
+      top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+      left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
     };
   }
 
@@ -80,29 +80,29 @@
     var $elements = [], elementsLength, i = 0;
 
     $.each(inviewObjects, function(i, inviewObject) {
-      var selector  = inviewObject.data.selector,
-          $element  = inviewObject.$element;
+      var selector = inviewObject.data.selector,
+        $element = inviewObject.$element;
       $elements.push(selector ? $element.find(selector) : $element);
     });
 
     elementsLength = $elements.length;
     if (elementsLength) {
-      viewportSize   = viewportSize   || getViewportSize();
+      viewportSize = viewportSize || getViewportSize();
       viewportOffset = viewportOffset || getViewportOffset();
 
-      for (; i<elementsLength; i++) {
+      for (; i < elementsLength; i++) {
         // Ignore elements that are not in the DOM tree
         if (!$.contains(documentElement, $elements[i][0])) {
           continue;
         }
 
-        var $element      = $($elements[i]),
-            elementSize   = { height: $element.height(), width: $element.width() },
-            elementOffset = $element.offset(),
-            inView        = $element.data('inview'),
-            visiblePartX,
-            visiblePartY,
-            visiblePartsMerged;
+        var $element = $($elements[i]),
+          elementSize = { height: $element.height(), width: $element.width() },
+          elementOffset = $element.offset(),
+          inView = $element.data('inview'),
+          visiblePartX,
+          visiblePartY,
+          visiblePartsMerged;
 
         // Don't ask me why because I haven't figured out yet:
         // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
@@ -123,7 +123,7 @@
           visiblePartY = (viewportOffset.top > elementOffset.top ?
             'bottom' : (viewportOffset.top + viewportSize.height) < (elementOffset.top + elementSize.height) ?
             'top' : 'both');
-          visiblePartsMerged = visiblePartX + "-" + visiblePartY;
+          visiblePartsMerged = visiblePartX + '-' + visiblePartY;
           if (!inView || inView !== visiblePartsMerged) {
             $element.data('inview', visiblePartsMerged).trigger('inview', [true, visiblePartX, visiblePartY]);
           }
@@ -134,13 +134,13 @@
     }
   }
 
-  $(w).bind("scroll resize scrollstop", function() {
+  $(w).bind('scroll resize scrollstop', function() {
     viewportSize = viewportOffset = null;
   });
 
   // IE < 9 scrolls to focused elements without firing the "scroll" event
   if (!documentElement.addEventListener && documentElement.attachEvent) {
-    documentElement.attachEvent("onfocusin", function() {
+    documentElement.attachEvent('onfocusin', function() {
       viewportOffset = null;
     });
   }
